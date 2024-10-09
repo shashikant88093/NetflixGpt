@@ -1,6 +1,6 @@
 # Netflix GPT
 
-- vite 
+- CRA 
 - Configured TailwindCSS
 
 
