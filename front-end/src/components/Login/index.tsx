@@ -50,7 +50,7 @@ const Login: React.FC = () => {
         />
       </div>
       <div>
-        <form 
+        <form
           className="absolute p-12 w-3/12 bg-black bg-opacity-80 my-24 mx-auto right-0 left-0 text-white"
           onSubmit={handleSubmit}
         >
@@ -73,7 +73,7 @@ const Login: React.FC = () => {
             onChange={handleChange}
             className="border-white font-normal rounded px-8 py-4 mb-4 bg-zinc-800 w-full"
           />
-         
+
           <input
             type="password"
             placeholder="Password"
@@ -82,17 +82,17 @@ const Login: React.FC = () => {
             onChange={handleChange}
             className="border-white rounded px-8 py-4 mb-4 bg-zinc-800 w-full"
           />
-          <button 
-            type="submit" 
+          <button
+            type="submit"
             className="bg-[#C11119] rounded font-semibold px-8 py-2 w-full"
           >
             {toggleForm}
           </button>
           <h2 className="text-center mt-4">OR</h2>
 
-          <button 
-            type="button" 
-            onClick={handleToggle} 
+          <button
+            type="button"
+            onClick={handleToggle}
             className="text-center mt-4 text-white"
           >
             {/* New to Netflix?{' '} */}

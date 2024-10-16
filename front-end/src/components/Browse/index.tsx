@@ -1,8 +1,6 @@
-import React from "react"
-const Browser : React.FC =()=>{
+import React from 'react';
+const Browser: React.FC = () => {
+  return <p>Hi I am Browser</p>;
+};
 
-    return(<p>Hi I am Browser</p>)
-}
-
-
-export default Browser
+export default Browser;
