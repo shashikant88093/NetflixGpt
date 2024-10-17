@@ -9,6 +9,8 @@
 - Login/Sign UP
      - Profile Management
      - Sign In / Sign up Form
+     - routing
+     - Form Validation with (formik library)
 
 - Browse ( after authentication)
      - Header
