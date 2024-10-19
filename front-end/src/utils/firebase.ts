@@ -1,7 +1,7 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp, FirebaseApp } from "firebase/app";
 import { getAnalytics, Analytics } from "firebase/analytics";
-
+import {getAuth} from "firebase/auth"
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
@@ -13,6 +13,7 @@ const firebaseConfig = {
   appId: process.env.REACT_APP_APPID as string,
   measurementId: process.env.REACT_APP_MEASUREMENTID as string,
 };
+console.log(firebaseConfig,"firebaseconfig")
 
 // Initialize Firebase with proper typing
 const app: FirebaseApp = initializeApp(firebaseConfig);
@@ -23,4 +24,5 @@ if (typeof window !== "undefined") {
   analytics = getAnalytics(app);
 }
 
-export { app, analytics };
+const auth = getAuth()
+export { app, analytics,auth };

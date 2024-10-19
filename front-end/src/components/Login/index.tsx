@@ -3,10 +3,13 @@ import React, { useState, useRef } from 'react';
 // components
 import Header from '../Header/index';
 
-// validation function 
-import checkValidaData from "../../utils/validate"
+// validation function
+import checkValidaData from '../../utils/validate';
 
 // Third party library
+// firebase
+import {createUserWithEmailAndPassword, signInWithEmailAndPassword} from 'firebase/auth';
+import {auth} from "../../utils/firebase"
 
 // import {Formik} from 'formik'
 
@@ -23,7 +26,7 @@ const Login: React.FC = () => {
     password: '',
     email: '',
   });
-  const [errorMessage,setErrorMessage] = useState<string | null>(null)
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const email = useRef<HTMLInputElement>(null);
   const password = useRef<HTMLInputElement>(null);
   const handleToggle = (): void => {
@@ -43,15 +46,47 @@ const Login: React.FC = () => {
     // Add form submission logic here.
     console.log(email, password, 'preint pls');
     if (email.current && password.current) {
-
-      const message = checkValidaData(email.current.value,password.current.value)
-      console.log(message,"message")
+      const message = checkValidaData(
+        email.current.value,
+        password.current.value,
+      );
+      console.log(message, 'message');
       if (typeof message === 'string') {
         setErrorMessage(message);
       } else {
         setErrorMessage(null);
         console.log('Form submitted with:', email, password);
         // Add further submission logic here (e.g., API call)
+      }
+      if (message) return;
+      if (toggleForm === 'Sign In' && message ===null) {
+        console.log(toggleForm,"toggleform")
+
+        signInWithEmailAndPassword(auth,formValue.email,formValue.password)
+        .then((userCredential)=>{
+          const user = userCredential.user
+          console.log(user,"signin")
+        })
+        .catch((error)=>{
+          const errorCode = error.code;
+          const errorMessage = error.message
+          setErrorMessage(errorCode+"_"+errorMessage)
+          console.log(errorCode,errorMessage)
+        })
+
+
+      } else if (message === 'Sign Up' && message ===null) {
+        createUserWithEmailAndPassword(auth,formValue.email,formValue.password)
+        .then((useCredential)=>{
+          const user = useCredential.user
+          console.log(user,"user")
+        })
+        .catch((error)=>{
+          const errorCode = error.code;
+          const errorMessage = error.message
+          setErrorMessage(errorCode+"_"+errorMessage)
+          console.log(errorCode,errorMessage)
+        })
       }
       console.log(
         'Form submitted with:',
@@ -106,7 +141,7 @@ const Login: React.FC = () => {
             onChange={handleChange}
             className="border-white rounded px-8 py-4 mb-4 bg-zinc-800 w-full"
           />
-          <p className='text-red-500 py-2 font-bold font-xl'>{errorMessage}</p>
+          <p className="text-red-500 py-2 font-bold font-xl">{errorMessage}</p>
           <button
             type="submit"
             className="bg-[#C11119] rounded font-semibold px-8 py-2 w-full"
